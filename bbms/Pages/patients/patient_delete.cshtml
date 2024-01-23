@@ -1,0 +1,29 @@
+﻿@page
+
+@using System.Data.SqlClient;
+
+@{
+    string errormsg = "";
+    string connectionString = "Data Source=DESKTOP-9DNNVCS\\SQLEXPRESS;Initial Catalog=blooddb;Integrated Security=True";
+    string id = Request.Query["delete"];
+
+
+    try
+    {
+        SqlConnection con = new SqlConnection(connectionString);
+        con.Open();
+        string sql = "Delete from patient where PatID = '" + id + "'";
+        SqlCommand cmd = new SqlCommand(sql, con);
+        cmd.ExecuteNonQuery();
+        con.Close();
+
+    }
+
+    catch (Exception ex)
+    {
+        return;
+    }
+
+    Response.Redirect("/patients/patient_view");
+    errormsg = "Data Deleted Successfully";
+}

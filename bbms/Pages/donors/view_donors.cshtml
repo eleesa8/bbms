@@ -1,0 +1,335 @@
+﻿@page
+@model bbms.Pages.donors.view_donorsModel
+@{
+}
+<body class="bg-content">
+
+    <main class="dashboard">
+        <div class="container">
+
+            @if (Model.errormsg.Length > 0)
+            {
+                <div class="alert alert-danger text-dark alert-dismissible fade show" role="alert">
+                    @Model.errormsg
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                </div>
+            }
+
+            @if (Model.savemsg.Length > 0)
+            {
+                <div class="alert alert-info text-dark alert-dismissible fade show" role="alert">
+                    @Model.savemsg
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                </div>
+            }
+
+            @if (Model.updatemsg.Length > 0)
+            {
+                <div class="alert alert-info text-dark alert-dismissible fade show" role="alert">
+                    @Model.updatemsg
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                </div>
+            }
+
+            @if (Model.deletemsg.Length > 0)
+            {
+                <div class="alert alert-info text-dark alert-dismissible fade show" role="alert">
+                    @Model.deletemsg
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                </div>
+            }
+
+            <center>
+                <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
+                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Donors</h2>
+                <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
+            </center>
+            <div class="row">
+                <div class="col">
+
+                    <img src="~/images/bdonors.png" width="100%" height="100%" style="margin-top: 0rem; margin-left:0" />
+                </div>
+                <div class="col">
+                    <br />
+                    <form method="POST">
+
+                        <div class="content">
+                            <div class="inputbox">
+                                <label>Donor Name</label>
+                                <input type="text" name="name" required value="@Model.donorinfo.name" autocomplete="off" />
+                                <input type="hidden" name="id" readonly value="@Model.donorinfo.id" />
+                            </div>
+
+                            <div class="inputbox">
+                                <label>Donor Age</label>
+                                <input type="text" name="age" required value="@Model.donorinfo.age" autocomplete="off" />
+                            </div>
+                            <div class="selectbox">
+                                <label>Donor Gender</label>
+                                <select name="gender" required>
+                                    <option value="@Model.donorinfo.gender">@Model.donorinfo.gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="inputbox">
+                                <label>Address</label>
+                                <input type="text" name="address" value="@Model.donorinfo.address" required autocomplete="off" />
+                            </div>
+                            <div class="inputbox">
+                                <label>Phone</label>
+                                <input type="text" name="phone" value="@Model.donorinfo.contact" required autocomplete="off" />
+                            </div>
+                            <div class="selectbox">
+                                <label>Blood Group</label>
+                                <select name="bgroup" required>
+                                    <option value="@Model.donorinfo.bgroup">@Model.donorinfo.bgroup</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+
+                            <div class="inputbox">
+                                <label>Date</label>
+                                <input type="date" name="date" value="@Model.donorinfo.date" required autocomplete="off" />
+                            </div>
+                        </div>
+                        <center>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#add" class="btn btns"><i class="fas fa-add"></i> Add</a>
+                            <button name="update" id="btnUpdate" asp-page-handler="Update" type="submit" class="btns"><i class="fas fa-edit"></i> Update</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+            <br /><br />
+            <table class="table table-bordered table-stripped" id="mytable" style="width: 115%;">
+                <tr>
+                <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                <th>DID</th>
+                <th>DName</th>
+                <th>Gender</th>
+                <th>DAge</th>
+                <th>BGroup</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Action</th>
+
+                </thead>
+                </tr
+
+                <tbody>
+                    @foreach (var row in Model.donorlist)
+                    {
+                        <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                            <td class="patient_id">@row.id</td>
+                            <td>@row.name</td>
+                            <td>@row.gender</td>
+                            <td>@row.age</td>
+                            <td>@row.bgroup</td>
+                            <td>@row.address</td>
+                            <td>@row.contact</td>
+                            <td>@row.date</td>
+                            <td>
+                                <a href="/donors/view_donors?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
+                                <a href="/donors/delete_donors?delete=@row.id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')"><i class="fas fa-trash"></i></a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="" style="background:red">
+                        <td colspan="9" style="height: 10px"></td>
+                    </tr>
+                </tfoot>
+
+
+            </table>
+        </div>
+    </main>
+</body>
+
+<style>
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+
+    .inputbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .inputbox:nth-child(2n) {
+            justify-content: space-between;
+        }
+
+    .select-box:nth-child(4n) {
+        justify-content: space-between;
+    }
+
+    .inputbox label {
+        width: 95%;
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: left;
+    }
+
+
+
+    .inputbox input {
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        display: flex;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+        .inputbox input:is(:focus, :valid) {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+    .selectbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .selectbox select {
+            height: 40px;
+            width: 95%;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+        }
+
+            .selectbox select:is(:focus, :valid) {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            }
+
+        .selectbox label {
+            width: 95%;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 5px 3px;
+            text-align: left;
+        }
+
+
+    .btns {
+        width: 40%;
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+        ;
+    }
+
+        .btns:hover {
+            background: transparent;
+            color: #dc3545;
+        }
+
+</style>
+
+<!--model-->
+<div class="modal fade" id="add" tabindex="-1" aria - labelledby="updateuserLabel" ariahidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:140%;">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateuserLabel" style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">New Donor</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="Post">
+                    <div class="content">
+                        <div class="inputbox">
+                            <label>Donor Name</label>
+                            <input type="text" name="name" required autocomplete="off" />
+                        </div>
+
+                        <div class="inputbox">
+                            <label>Donor Age</label>
+                            <input type="text" name="age" required autocomplete="off" />
+                        </div>
+                        <div class="selectbox">
+                            <label>Donor Gender</label>
+                            <select name="gender" required>
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="inputbox">
+                            <label>Address</label>
+                            <input type="text" name="address" required autocomplete="off" />
+                        </div>
+                        <div class="inputbox">
+                            <label>Phone</label>
+                            <input type="text" name="phone" autocomplete="off" required />
+                        </div>
+                        <div class="selectbox">
+                            <label>Blood Group</label>
+                            <select name="bgroup">
+                                <option value="">Select</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+
+                        <div class="inputbox">
+                            <label>Date</label>
+                            <input type="date" name="date" required autocomplete="off" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btns" data-bs-dismiss="modal">Close</button>
+                        <input name="save" type="submit" class="btns" value="Save" />
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

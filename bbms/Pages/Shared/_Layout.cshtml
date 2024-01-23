@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+		<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	    <script src="~/js/jquery-3.7.1.js"></script>
+		<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+		
+      
+		<script src="~/font-awesome/js/all.min.js"></script>
+	<title>Blood Bank System</title>
+    </head>
+
+    
+
+
+    <body>
+
+   
+
+    <div class="container">
+		<div class="navigation">
+			<ul>
+
+				<li>
+					<a href="">
+						<span class="icon"><i class='icons fas fa-droplet'></i></span>
+						<span class="title">BBMS</span>
+					</a>
+				</li>
+
+
+
+
+				<li>
+					<a href="index.php" class="active">
+						<span class="icon"><i class='icons fas fa-home-alt'></i></span>
+						<span class="title">Dashboard</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="index.php" class="active">
+						<span class="icon"><i class='icons fas fa-users'></i></span>
+						<span class="title">Users</span>
+					</a>
+				</li>
+
+
+				<li>
+					<a href="/patients/patient_view">
+						<span class="icon"><i class='icons fas fa-hospital-user'></i></span>
+						<span class="title">Patients</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/donors/view_donors">
+						<span class="icon"><i class='icons fas fa-hand-holding-droplet'></i></span>
+						<span class="title">Donors</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/BStock/view_blood">
+						<span class="icon"><i class='icons fas fa-sack-dollar'></i></span>
+						<span class="title">Blood Stock</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/investigation/view_investigation">
+						<span class="icon"><i class='icons fas fa-vial-virus'></i></span>
+						<span class="title">Investigation</span>
+					</a>
+
+				</li>
+
+
+				<li>
+					<a href="">
+						<span class="icon"><i class='icons fas fa-exchange'></i></span>
+						<span class="title">Transfusion</span>
+					</a>
+				</li>
+
+
+
+				<li>
+					<a href="#" data-bs-toggle="modal" data-bs-target="#confirmlog">
+						<span class="icon"><i class='icons fas fa-sign-out-alt'></i></span>
+						<span class="title">Logout</span>
+
+					</a>
+				</li>
+
+				<li class="mode">
+					<div class="moon-sun">
+						<i class='bx bx-moon icons moon'></i>
+						<i class='bx bx-sun icons sun'></i>
+
+					</div>
+					<span class="text">Dark Mode</span>
+
+					<div class="toggle-switch">
+						<span class="switch"></span>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+		</div>
+		<div class="container">
+        <main role="main" class="dashboard">
+            @RenderBody()
+        </main>
+		</div>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+	* {
+		font-family: 'poppins', sans-serif;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+
+	:root {
+		/*===== colors ===== */
+		--body-color: #fff;
+		--sidebar-color: #dc3545;
+		--primary-color:#fff;
+		--primary-color-light: #f6f5ff;
+		--toggle-color: #ddd;
+		--text-color: #000;
+		/* ===== trasition =====*/
+
+		--tran-02: all 0.2s ease;
+		--tran-03: all 0.3s ease;
+		--tran-04: all 0.4s ease;
+		--tran-05: all 0.5s ease;
+	}
+
+	body.dark {
+		--body-color: #000;
+		--sidebar-color: #242526;
+		--primary-color: #3A3B3C;
+		--primary-color-light: #3A3B3C;
+		--toggle-color: #FFF;
+		--text-color: white;
+	}
+
+
+
+	body {
+		min-height: 100vh;
+		background: var(--body-color);
+		transition: var(--tran-04);
+		overflow-x: hidden;
+	}
+
+
+	/*navigation*/
+	.navigation {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 250px;
+		padding: 10px 14px;
+		background: var(--sidebar-color);
+		transition: var(--tran-05);
+		z-index: 100;
+		box-shadow: 0 7px 25px rgba(0, 0, 0, 1.0);
+		border-right: 1px rgba(0, 0, 0, 3.0);
+	}
+
+		.navigation ul {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+			.navigation ul li {
+				height: 50px;
+				margin-top: 10px;
+				list-style: none;
+				display: flex;
+				align-items: center;
+			}
+
+				.navigation ul li:nth-child(1) {
+					margin-bottom: 40px;
+					pointer-events: none;
+				}
+
+				.navigation ul li a {
+					height: 100%;
+					width: 100%;
+					display: flex;
+					align-items: center;
+					text-decoration: none;
+					border-radius: 6px;
+				}
+
+				.navigation ul li:hover a,
+				.navigation ul li.hovered a {
+					background:white;
+
+				}
+
+		.navigation li a:hover .icon .icons,
+		.navigation li a:hover .title {
+		color: black;
+		}
+
+
+		.navigation li.hovered a .icon .icons,
+		.navigation li.hovered a .title {
+			color: #dc3545;
+		}
+		.navigation ul li a .icon {
+			font-size: 20px;
+			min-width: 60px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+			.navigation ul li a .icon .icons{
+				font-size: 1.5rem;
+				color: #fff;
+				transition: var(--tran-03);
+			}
+
+		.navigation ul li a .title {
+			color: white;
+			transition: var(--tran-03);
+			font-weight : bolder;
+		}
+
+	.icon-link {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		color: var(--text-color);
+	}
+
+	
+
+	li .logout {
+		position: absolute;
+		bottom: 0;
+	}
+
+	/* switch toggle */
+
+	.mode {
+		position: relative;
+		border-radius: 6px;
+		background: var(--primary-color-light);
+	}
+
+		.mode .moon-sun {
+			height: 50px;
+			width: 60px;
+			display: flex;
+			align-items: center;
+		}
+
+		.mode .text {
+			color: var(--text-color);
+			transition: var(--tran-03);
+		}
+
+		.mode i {
+			position: absolute;
+			color: var(--text-color);
+			transition: var(--tran-03);
+		}
+
+
+			.mode i.sun {
+				opacity: 0;
+			}
+
+		.mode .toggle-switch {
+			position: absolute;
+			display: flex;
+			right: 0;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			min-width: 60px;
+			cursor: pointer;
+			border-radius: 6px;
+			background: var(--primary-color-light);
+		}
+
+	.toggle-switch .switch {
+		height: 22px;
+		width: 44px;
+		background: var(--toggle-color);
+		position: relative;
+		border-radius: 25px;
+	}
+
+	.switch::before {
+		height: 15px;
+		width: 15px;
+		background: var(--sidebar-color);
+		content: '';
+		position: absolute;
+		border-radius: 50%;
+		top: 50%;
+		left: 5px;
+		transform: translateY(-50%);
+		transition: var(--tran-03);
+	}
+
+	body.dark .switch::before {
+		left: 24px;
+	}
+
+	body.dark .mode i.sun {
+		opacity: 1;
+	}
+
+	body.dark .mode i.moon {
+		opacity: 0;
+	}
+
+	/* close toggle*/
+
+	.toggle {
+		position: absolute;
+		top: 5%;
+		right: -20px;
+		transform: translateY(-50%) rotate(180deg);
+		height: 25px;
+		width: 25px;
+		background: var(--primary-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		color: var(--sidebar-color);
+		font-size: 22px;
+		transition: var(--tran-03);
+	}
+
+	body.dark .navigation .toggle {
+		transform: rotate(180deg);
+		color: var(--text-color);
+	}
+
+	.body.dark .navigation li a:hover .icon,
+	.body.dark .navigation li a:hover .text {
+		color: var(--text-color);
+	}
+
+	/*main*/
+
+	main .dashboard {
+		position: relative;
+		width: calc(100% - 130px);
+		left: 130px;
+		min-height: 100vh;
+		background: var(--body-color);
+		transition: var(--tran-05);
+	}
+
+
+</style>
+
+
+<script type="text/javascript">
+	const body = document.querySelector("body");
+	sidebar = body.querySelector(".navigation");
+	toggle = body.querySelector(".toggle");
+	searchBtn = body.querySelector(".search-box");
+	modeSwitch = body.querySelector(".toggle-switch");
+	modeText = body.querySelector(".text");
+
+	/*toggle.addEventListener("click", () =>{
+		sidebar.classList.toggle("close");
+
+	});*/
+
+
+
+	modeSwitch.addEventListener("click", () => {
+		body.classList.toggle("dark");
+
+		if (body.classList.contains("dark")) {
+			modeText.innerHTML = 'Light Mode';
+		}
+
+		else {
+			modeText.innerText = "Dark Mode";
+		}
+	});
+
+	$(document).ready(function () {
+
+		$('.logout').click(function (e) {
+
+			e.preventDefault();
+			/*console.log("Hello");*/
+
+			$('#confirmlog').modal('show');
+		});
+	});
+	//active link
+
+	let list = document.querySelectorAll(".navigation li");
+
+	function activelink() {
+
+		list.forEach((item) => {
+			item.classList.remove("hovered");
+		});
+
+		this.classList.add("hovered");
+	}
+
+	list.forEach(item => item.addEventListener("mouseover", activelink));
+
+
+
+</script>
