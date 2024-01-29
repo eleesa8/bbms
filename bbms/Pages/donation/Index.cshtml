@@ -69,68 +69,69 @@
 
                 <div class="col">
 
-                    <div class="slide-container">
-                        <div class="slide-content">
-                            <div class="card-wrapper">
-                                <h3 style="font-family:Tahoma; font-weight:700; text-align:center; color:#dc3545; ">Donors List</h3>
-                                <table class="table table-bordered table-stripped" id="mytable" style="width: 120%;">
-                                    <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
-                                    <tr>
-                                    <th>DID</th>
-                                    <th>DName</th>
-                                    <th>BGroup</th>
-                                    <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        @foreach (var row in Model.dlist)
-                                        {
-                                            <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
-                                                <td>@row.id</td>
-                                                <td>@row.name</td>
-                                                <td>@row.bgroup</td>
-                                                <td>
-                                                    <a href="/donation/Index?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
+                    <form method="POST">
 
-                                    <tfoot>
-                                        <tr class="" style="background:red">
-                                            <td colspan="4" style="height: 10px"></td>
-                                        </tr>
-                                    </tfoot>
+                        <div class="content">
+                            <input type="hidden" name="id" value="@Model.donate.id" />
 
-
-                                </table>
+                            <div class="inputbox">
+                                <label>Donor Name</label>
+                                <input type="text" readonly name="name" value="@Model.donate.name" required autocomplete="off" />
+                            </div>
+                            <div class="inputbox">
+                                <label>Blood Group</label>
+                                <input type="text" readonly name="bgroup" value="@Model.donate.bgroup" required autocomplete="off" />
                             </div>
                         </div>
-                    </div>
+                        <center>
+                            <button name="donate" id="btnDonate" asp-page-handler="Donate" type="submit" class="btns"><i class="fas fa-hand-holding-droplet"></i>&nbsp; &nbsp;Donate</button>
+                        </center>
+                    </form>
 
                 </div>
 </div>
 
 
-        </div><form method="POST">
+        </div>
+        <div class="slide-container">
+            <div class="slide-content">
+                <div class="card-wrapper">
+                    <table class="table table-bordered table-stripped" id="mytable" style="width: 120%;">
+                        <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                            <tr>
+                                <th>DID</th>
+                                <th>DName</th>
+                                <th>BGroup</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-            <div class="content">
-                <input type="hidden" name="id" value="@Model.donate.id" />
+                        <tbody>
+                            @foreach (var row in Model.dlist)
+                            {
+                                <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                                    <td>@row.id</td>
+                                    <td>@row.name</td>
+                                    <td>@row.bgroup</td>
+                                    <td>
+                                        <a href="/donation/Index?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
 
-                <div class="inputbox">
-                    <label>Donor Name</label>
-                    <input type="text" name="name" value="@Model.donate.name" required autocomplete="off" />
-                </div>
-                <div class="inputbox">
-                    <label>Blood Group</label>
-                    <input type="text" name="bgroup" value="@Model.donate.bgroup" required autocomplete="off" />
+                        <tfoot>
+                            <tr class="" style="background:red">
+                                <td colspan="4" style="height: 10px"></td>
+                            </tr>
+                        </tfoot>
+
+
+                    </table>
                 </div>
             </div>
-            <center>
-                <button name="donate" id="btnDonate" asp-page-handler="Donate" type="submit" class="btns"><i class="fas fa-edit"></i>Donate</button>
-            </center>
-        </form>
+        </div>
+        
 </main>
 </body>
 

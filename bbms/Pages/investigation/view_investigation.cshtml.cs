@@ -104,15 +104,6 @@ namespace bbms.Pages.transfare
 
                 if (dr.Read())
                 {
-                    SqlConnection sqlconn = new SqlConnection(connectionString);
-                    sqlconn.Open();
-                    string qr = "UPDATE donors SET Status = '" + Rejected + "' WHERE DonorID = '" + id + "'";
-                    SqlCommand com = new SqlCommand(qr, sqlconn);
-                    com.ExecuteNonQuery();
-                    datamsg = "Sorry You cannot Donate!";
-                }
-                else
-                {
 
                     SqlConnection sqlcon = new SqlConnection(connectionString);
                     sqlcon.Open();
@@ -120,7 +111,17 @@ namespace bbms.Pages.transfare
                     SqlCommand comm = new SqlCommand(qry, sqlcon);
                     comm.ExecuteNonQuery();
 
-                    successmsg = "Thank u for Donation!";
+                    successmsg = "Welcome!";
+                }
+                else
+                {
+
+                    SqlConnection sqlconn = new SqlConnection(connectionString);
+                    sqlconn.Open();
+                    string qr = "UPDATE donors SET Status = '" + Rejected + "' WHERE DonorID = '" + id + "'";
+                    SqlCommand com = new SqlCommand(qr, sqlconn);
+                    com.ExecuteNonQuery();
+                    datamsg = "Sorry You cannot Donate!";
 
 
                 }

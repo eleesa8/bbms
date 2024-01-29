@@ -92,7 +92,7 @@ namespace bbms.Pages.transfare
                 string blodgroup = Request.Form["bgroup"];
                 string blodtran = Request.Form["blodtran"];
                 string date = Request.Form["date"];
-                int stock = newstock - 1;
+                int stock = newstock -= 1;
 
                 SqlConnection conn = new SqlConnection(connectionString);
                 conn.Open();
