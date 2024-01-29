@@ -92,8 +92,8 @@
            <br /><br /><br /><br />
            
             <table class="table table-bordered table-stripped" id="mytable" style="width: 115%;">
-                <tr>
                 <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                <tr>
                 <th>PID</th>
                 <th>PName</th>
                 <th>Gender</th>
@@ -102,10 +102,8 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Action</th>
-
+                </tr>
                 </thead>
-                </tr
-
                 <tbody>
                     @foreach(var row in Model.patientlist){
                         <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
@@ -310,3 +308,66 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mytable').DataTable({
+            //"order": [0,asc],
+            order: [0, 'desc'],
+
+            mark: true,
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                ['10 rows', '25 rows', '50 rows', '100 rows', 'Show All']
+            ],
+
+
+
+
+
+            buttons: [
+                'pageLength',
+                {
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'pdfHtml5',
+                    // download: 'open',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'colvis'
+            ],
+            columDefs: [{
+                targets: -1,
+                visible: false
+            }]
+
+
+        });
+    });
+</script>

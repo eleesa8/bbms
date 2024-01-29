@@ -1,0 +1,302 @@
+﻿@page
+@model bbms.Pages.donation.IndexModel
+@{
+}
+@if (Model.datamsg.Length > 0)
+{
+    <div class="alert alert-danger text-dark alert-dismissible fade show" role="alert">
+        @Model.datamsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+
+@if (Model.successmsg.Length > 0)
+{
+    <div class="alert alert-info text-dark alert-dismissible fade show" role="alert">
+        @Model.successmsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+
+<body class="bg-content">
+    <main class="dashboard">
+        <div class="container">
+            <center>
+                <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
+                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Donation</h2>
+                <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
+            </center>
+            <br />
+            <div class="row">
+                <div class="col">
+
+                    <div class="slide-container">
+                        <div class="slide-content">
+                            <div class="card-wrapper">
+                                <h3 style="font-family:Tahoma; font-weight:700; text-align:center; color:#dc3545; ">Blood List</h3>
+                                <table class="table table-bordered table-stripped" style="width: 90%;">
+                                    <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                                    <tr>
+                                    <th>BID</th>
+                                    <th>BGroup</th>
+                                    <th>Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in Model.blist)
+                                        {
+                                            <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                                                <td>@row.id</td>
+                                                <td>@row.bgroup</td>
+                                                <td>@row.amount</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr class="" style="background:red">
+                                            <td colspan="3" style="height: 10px"></td>
+                                        </tr>
+                                    </tfoot>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <div class="slide-container">
+                        <div class="slide-content">
+                            <div class="card-wrapper">
+                                <h3 style="font-family:Tahoma; font-weight:700; text-align:center; color:#dc3545; ">Donors List</h3>
+                                <table class="table table-bordered table-stripped" id="mytable" style="width: 120%;">
+                                    <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                                    <tr>
+                                    <th>DID</th>
+                                    <th>DName</th>
+                                    <th>BGroup</th>
+                                    <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        @foreach (var row in Model.dlist)
+                                        {
+                                            <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                                                <td>@row.id</td>
+                                                <td>@row.name</td>
+                                                <td>@row.bgroup</td>
+                                                <td>
+                                                    <a href="/donation/Index?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr class="" style="background:red">
+                                            <td colspan="4" style="height: 10px"></td>
+                                        </tr>
+                                    </tfoot>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+</div>
+
+
+        </div><form method="POST">
+
+            <div class="content">
+                <input type="hidden" name="id" value="@Model.donate.id" />
+
+                <div class="inputbox">
+                    <label>Donor Name</label>
+                    <input type="text" name="name" value="@Model.donate.name" required autocomplete="off" />
+                </div>
+                <div class="inputbox">
+                    <label>Blood Group</label>
+                    <input type="text" name="bgroup" value="@Model.donate.bgroup" required autocomplete="off" />
+                </div>
+            </div>
+            <center>
+                <button name="donate" id="btnDonate" asp-page-handler="Donate" type="submit" class="btns"><i class="fas fa-edit"></i>Donate</button>
+            </center>
+        </form>
+</main>
+</body>
+
+<style>
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+
+    .inputbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .inputbox:nth-child(2n) {
+            justify-content: space-between;
+        }
+
+    .select-box:nth-child(4n) {
+        justify-content: space-between;
+    }
+
+    .inputbox label {
+        width: 95%;
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: left;
+    }
+
+
+
+    .inputbox input {
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        display: flex;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+        .inputbox input:is(:focus, :valid) {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+    .selectbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .selectbox select {
+            height: 40px;
+            width: 95%;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+        }
+
+            .selectbox select:is(:focus, :valid) {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            }
+
+        .selectbox label {
+            width: 95%;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 5px 3px;
+            text-align: left;
+        }
+
+
+    .btns {
+        width: 40%;
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+    }
+
+        .btns:hover {
+            background: transparent;
+            color: #dc3545;
+        }
+
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mytable').DataTable({
+            //"order": [0,asc],
+            order: [0, 'desc'],
+
+            mark: true,
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                ['10 rows', '25 rows', '50 rows', '100 rows', 'Show All']
+            ],
+
+
+
+
+
+            buttons: [
+                'pageLength',
+                {
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'pdfHtml5',
+                    // download: 'open',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'colvis'
+            ],
+            columDefs: [{
+                targets: -1,
+                visible: false
+            }]
+
+
+        });
+    });
+</script>

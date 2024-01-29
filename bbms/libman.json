@@ -13,6 +13,18 @@
     {
       "library": "material-design-iconic-font@2.2.0",
       "destination": "wwwroot/material-design-iconic-font/"
+    },
+    {
+      "library": "datatable@2.0.2",
+      "destination": "wwwroot/datatable/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/datatables/"
     }
   ]
 }

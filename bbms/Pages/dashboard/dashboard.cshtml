@@ -1,0 +1,665 @@
+﻿@page
+@model bbms.Login.loginModel
+@{
+   
+}
+<body>
+    <main >
+        <div class="container">
+            <div class="card-containers">
+                <div class="cardBox">
+                    <div class="card light-red">
+                        <div class="card-content">
+                            <div class="content">
+                                <span class="cardName text-light">Total Users</span>
+                                <span class="numbers text-light">
+                                    @Model.users
+                                </span>
+                            </div>
+
+                            <i class="fa fa-users iconBx dark-red" style="color:#dc3545"></i>
+                        </div>
+                    </div>
+
+                    <div class="card light-purple">
+                        <div class="card-content">
+                            <div class="content">
+                                <span class="cardName" style="color:#dc3545;">Total Patients</span>
+                                <span class="numbers" style="color:#dc3545;">
+                                    @Model.patient
+                                </span>
+                            </div>
+
+                            <i class="fa fa-hospital-user iconBx dark-purple"></i>
+                        </div>
+                    </div>
+
+                    <div class="card light-green">
+                        <div class="card-content">
+                            <div class="content">
+                                <span class="cardName text-light">Total Donors</span>
+                                <span class="numbers text-light">
+                                    @Model.donors
+                                </span>
+                            </div>
+
+                            <i class="fa fa-hand-holding-droplet iconBx dark-green" style="color:#dc3545"></i>
+                        </div>
+                    </div>
+
+                    <div class="card light-blue">
+                        <div class="card-content">
+                            <div class="content">
+                                <span class="cardName" style="color:#dc3545;">Total Transfusion</span>
+                                <span class="numbers" style="color:#dc3545;">
+                                    @Model.transfare
+                                </span>
+                            </div>
+
+                            <i class="fa fa-exchange iconBx dark-blue"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container">   
+                <div class="cardBox">
+                <div class="box">
+                    <h2 class="text">A+</h2>
+                    <div class="percent AP">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.Aplus</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h2 class="text">A-</h2>
+                    <div class="percent AM">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.AMinus</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                        <h2 class="text">B+</h2>
+                        <div class="percent BP">
+                            <svg>
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70"></circle>
+                            </svg>
+                            <div class="number">
+                                <h2>@Model.Bplus</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="box">
+                        <h2 class="text">B-</h2>
+                        <div class="percent BM">
+                            <svg>
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70"></circle>
+                            </svg>
+                            <div class="number">
+                                <h2>@Model.BMinus</h2>
+                            </div>
+                        </div>
+                    </div>
+              
+
+
+                <div class="box">
+                    <h2 class="text">AB+</h2>
+                    <div class="percent ABP">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.ABplus</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h2 class="text">AB-</h2>
+                    <div class="percent ABM">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.ABMinus</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h2 class="text">0+</h2>
+                    <div class="percent OP">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.Oplus</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h2 class="text">O-</h2>
+                    <div class="percent OM">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>@Model.OMinus</h2>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+            <!-----donors------>
+            <div class="details">
+                <div class="recentOrder">
+                    <div class="cardHeader">
+                        <h2>Donors</h2>
+                        <a href="view_order.php" class="btn">View All</a>
+                    </div>
+
+                    <table>
+                        <thead>
+
+                            <tr>
+
+                                <th style="color:white; font-weight:bold">#</th>
+                                <th style="color:white; font-weight:bold">Donor Name</th>
+                                <th style="color:white; font-weight:bold">Gender</th>
+                                <th style="color:white; font-weight:bold">Address</th>
+                                <th style="color:white; font-weight:bold">Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>1</td>
+                                <td>Badra Ali</td>
+                                <td>Female</td>
+                                <td>M.Ali</td>
+                                <td>4506655</td>
+                            </tr>
+
+                            <tr style="background:#dc3545;">
+                                <td style="color:white; font-weight:bold">2</td>
+                                <td style="color:white; font-weight:bold">Amal Adam</td>
+                                <td style="color:white; font-weight:bold">Female</td>
+                                <td style="color:white; font-weight:bold">Qasabka</td>
+                                <td style="color:white; font-weight:bold">30076543</td>
+                            </tr>
+
+                            <tr>
+                                <td style="font-weight:bold">3</td>
+                                <td style="font-weight:bold">Mohamed Ahmed</td>
+                                <td style="font-weight:bold">Male</td>
+                                <td style="font-weight:bold">Oct</td>
+                                <td style="font-weight:bold">3066654</td>
+                            </tr>
+
+                            <tr style="background:#dc3545;">
+                                <td style="color:white; font-weight:bold">4</td>
+                                <td style="color:white; font-weight:bold">Ahmed Jama</td>
+                                <td style="color:white; font-weight:bold">Male</td>
+                                <td style="color:white; font-weight:bold">Plaza</td>
+                                <td style="color:white; font-weight:bold">9065430</td>
+                            </tr>
+
+                            <tr>
+                                <td style=" font-weight:bold">5</td>
+                                <td style=" font-weight:bold">Ali Mohamed</td>
+                                <td style=" font-weight:bold">Male</td>
+                                <td style=" font-weight:bold">Hodan</td>
+                                <td style="font-weight:bold">105430</td>
+                            </tr>
+
+                            <tr style="background:#dc3545;">
+                                <td style="color:white; font-weight:bold">6</td>
+                                <td style="color:white; font-weight:bold">Ayman Ali</td>
+                                <td style="color:white; font-weight:bold">Male</td>
+                                <td style="color:white; font-weight:bold">Qasabka</td>
+                                <td style="color:white; font-weight:bold">255430</td>
+                            </tr>
+
+                            <tr>
+                                <td style=" font-weight:bold">1</td>
+                                <td style=" font-weight:bold">Fatima Sacid</td>
+                                <td style=" font-weight:bold">Male</td>
+                                <td style=" font-weight:bold">Maxadka</td>
+                                <td style=" font-weight:bold">1207665</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-----categories--->
+
+                <div class="recentCat">
+                    <div class="cardHeader">
+                        <h2>Blood Groups</h2>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>A+</h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>A-</h4>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>B+</h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>B-</h4>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>AB+</h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px"><div class="imgBx"><i class="fas fa-droplet"></i></div>
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>AB-</h4>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>O+</h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            </td>
+                            <td>
+                                <h4>O-</h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+    </main>
+            </body>
+
+
+<style>
+    .card-container{
+        background: white;
+        padding: 2rem;
+        width: 120%;
+        border-radius: 10px;
+        margin-top : 2rem;
+        box-shadow: 0 0 25px #dc3545;
+        border: 3px solid black;
+    }
+
+    .card-containers {
+        background: transparent;
+        padding: 2rem;
+        width: 120%;
+        border-radius: 10px;
+        margin-top: 2rem;
+    }
+    .cardBox {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5rem;
+        justify-content:center;
+    }
+
+    .card {
+            background: rgba(251,233,233);
+            border-radius: 10px;
+            padding: 1.2rem;
+            width: 305px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 0 25px #dc3545;
+            border: 3px solid black;
+    }
+
+        .cardBox .card:hover{
+            transform : translateY(-5px);
+        }
+
+        .card-content{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+        }
+    .numbers {
+       font-size: 28px;
+       font-family: Courier New, Courier, monospace;
+       font-weight: 600;
+    }
+
+    .cardName {
+       font-size: 18px;
+       font-weight: 700;
+    }
+
+    .iconBx {
+       color : #fff;
+       padding : 1rem;
+       height : 60px;
+       width: 60px;
+       text-align: center;
+       border-radius: 50%;
+       font-size: 1.5rem;
+       background: #dc3545;
+    }
+
+   /* clor css*/
+   .light-red {
+       background: #dc3545;
+   }
+
+    .light-purple {
+        background: #fff;
+    }
+
+    .light-green {
+        background: #dc3545;
+    }
+
+    .light-blue {
+        background: #fff;
+    }
+
+    .dark-red {
+        background: #fff;
+    }
+
+    .dark-purple {
+        background: #dc3545;
+    }
+
+    .dark-green {
+        background: #fff;
+    }
+
+    .dark-blue {
+        background: #dc3545;
+    }
+
+    .percent{
+        position:relative;
+        width:150px;
+        height:150px;
+    }
+
+    .percent svg{
+        position:relative;
+        width:150px;
+        height:150px;
+    }
+    .percent svg circle{
+        fill: none;
+        width:150px;
+        height:150px;
+        stroke-width: 10;
+        stroke : #000;
+        transform: translate(5px,5px);
+        stroke-dasharray:440;
+        stroke-dashoffset:440;
+    }
+
+    .percent svg circle:nth-child(1){
+        stroke-dashoffset:0;
+        stroke: #f3f3f3;
+    }
+
+    .AP svg circle:nth-child(2){
+        stroke-dashoffset: calc(440 - (440 * @Model.Apluscir) / 100);
+        stroke: #dc3545;
+    }
+
+    .AM svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.AMinuscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .BP svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.Bpluscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .BM svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.BMinuscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .ABP svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.ABpluscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .ABM svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.ABMinuscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .OP svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.Opluscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .OM svg circle:nth-child(2){
+      stroke-dashoffset: calc(440 - (440 * @Model.OMinuscir) / 100);
+      stroke: #dc3545;
+    }
+
+    .percent .number{
+        position: absolute;
+        top:0;
+        left: 0;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color: #000;
+       margin-left: 0.5rem;
+    }
+
+    .percent .number h2{
+        font-size: 40px;
+    }
+
+    .percent .number h2 span{
+        font-size: 26px;
+    }
+
+    .text{
+       padding:5px 0 0;
+       color: #000;
+       margin-left: 3.9rem;
+       font-weight: 700;
+       letter-spacing:1px;
+    }
+
+    /*details*/
+.details{
+    position: relative;
+    width: 120%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 40px;
+}
+
+.details .recentOrder{
+    position: relative;
+    display: grid;
+    min-height: 400px;
+    background: var(--body-color);
+    padding: 10px;
+    box-shadow: 0 0 25px #dc3545;
+     border: 3px solid black;
+    border-radius: 20px;
+}
+.details table{
+   
+  
+    font-family: Tahoma;
+    width: 100%;
+    border-collapse: collapse;
+  
+
+  }
+
+  tr{
+        transition: all .2s ease-in;
+        cursor: pointer; 
+    }
+     th,td{
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #000;
+        color: black;
+     }
+
+     .details table thead{
+        background-color: #dc3545;
+        color: #fff;
+
+     }
+
+  .details .cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .cardHeader h2{
+    font-weight: 700;
+    color: #dc3545;
+  }
+
+  .cardHeader .btn{
+    position: relative;
+    padding: 5px 10px;
+    background: #dc3545;
+    text-decoration: none;
+    color: white;
+    border-radius: 6px;
+  }
+
+  .recentCat{
+    position: relative;
+        display: grid;
+        min-height: 400px;
+        background: var(--body-color);
+        padding: 10px;
+        box-shadow: 0 0 25px #dc3545;
+        border: 3px solid black;
+        border-radius: 20px;
+  }
+  .recentCat table{
+      font-family: Tahoma;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .recentCat table tr{
+        transition: all .2s ease-in;
+        cursor: pointer; 
+    }
+    .recentCat table th,td{
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #000;
+     }
+     h4{
+        font-size: 1.2rem;
+        font-weight: bolder;
+        color: #dc3545
+     }
+
+  .recentCat .imgBx{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    color: #dc3545;
+  }
+  .recentCat .imgBx img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+</style>

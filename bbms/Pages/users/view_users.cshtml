@@ -1,0 +1,252 @@
+﻿@page
+@model bbms.Pages.users.view_usersModel
+@{
+}
+
+@if (Model.errormsg.Length > 0)
+{
+    <div class="alert alert-danger text-dark alert-dismissible fade show" role="alert">
+        @Model.errormsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+
+@if (Model.successmsg.Length > 0)
+{
+    <div class="alert alert-info text-dark alert-dismissible fade show" role="alert">
+        @Model.successmsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+
+
+<body class="bg-content">
+
+    <main class="dashboard">
+        <div class="container">
+
+            <br />
+            <center>
+                <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
+                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Users</h2>
+                <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
+            </center>
+                    <form method="POST">
+
+                        <div class="content">
+                            <div class="inputbox">
+                                <label>UserName</label>
+                                <input type="text" name="name" required value="@Model.userinfo.name" autocomplete="off" />
+                                <input type="hidden" name="id" readonly value="@Model.userinfo.id" />
+                            </div>
+
+                            <div class="inputbox">
+                                <label>FullName</label>
+                                <input type="text" name="full" required value="@Model.userinfo.full" autocomplete="off" />
+                            </div>
+                            <div class="inputbox">
+                                <label>Password</label>
+                                <input type="text" name="password" value="@Model.userinfo.password" required autocomplete="off" />
+                            </div>
+                            <div class="selectbox">
+                                <label>Role</label>
+                                <select name="role" required>
+                                    <option value="@Model.userinfo.role">@Model.userinfo.role</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <center>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#add" class="btn btns"><i class="fas fa-add"></i> Add</a>
+                            <button name="update" id="btnUpdate" asp-page-handler="Update" type="submit" class="btns"><i class="fas fa-edit"></i> Update</button>
+                        </center>
+                    </form>
+            <br /><br /><br /><br />
+
+            <table class="table table-bordered table-stripped" id="mytable" style="width: 115%;">
+                <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                <tr>
+                <th>UID</th>
+                <th>UName</th>
+                <th>Full</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.userlist)
+                    {
+                        <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                            <td class="patient_id">@row.id</td>
+                            <td>@row.name</td>
+                            <td>@row.full</td>
+                            <td>@row.password</td>
+                            <td>@row.role</td>
+                            <td>
+                                <a href="/users/view_users?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
+                                <a href="/users/user_delete?delete=@row.id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')"><i class="fas fa-trash"></i></a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="" style="background:red">
+                        <td colspan="6" style="height: 10px"></td>
+                    </tr>
+                </tfoot>
+
+
+            </table>
+        </div>
+    </main>
+</body>
+
+<style>
+
+  
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+
+    form :where( .content .inputbox, .selectbox){
+        display: flex;
+        width: calc(100% / 4 - 5px);
+        flex-direction: column;
+        margin: 5px 0;
+    }
+
+
+    .inputbox label {
+        width: 95%;
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: left;
+    }
+
+
+
+    .inputbox input {
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        display: flex;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+        .inputbox input:is(:focus, :valid) {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .selectbox select {
+            height: 40px;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+        }
+
+            .selectbox select:is(:focus, :valid) {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            }
+
+        .selectbox label {
+            width: 95%;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 5px 3px;
+            text-align: left;
+        }
+
+
+    .btns {
+        width: 20%;
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+        ;
+    }
+
+        .btns:hover {
+            background: transparent;
+            color: #dc3545;
+        }
+
+</style>
+
+<!--model-->
+<div class="modal fade" id="add" tabindex="-1" aria - labelledby="updateuserLabel" ariahidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:140%;">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateuserLabel" style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">New User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="Post">
+                    <div class="content">
+                        <div class="inputbox">
+                            <label>UserName</label>
+                            <input type="text" name="name" required autocomplete="off" />
+                        </div>
+
+                        <div class="inputbox">
+                            <label>FullName</label>
+                            <input type="text" name="full" required autocomplete="off" />
+                        </div>
+                        <div class="selectbox">
+                            <label>Role</label>
+                            <select name="role" required>
+                                <option value="">Select</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                        </div>
+                        <div class="inputbox">
+                            <label>Password</label>
+                            <input type="text" name="password" required autocomplete="off" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btns" data-bs-dismiss="modal">Close</button>
+                        <input name="save" type="submit" class="btns" value="Save" />
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mytable').DataTable();
+    });
+    </Script>

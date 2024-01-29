@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\inc\js\bootstrap.min.js" />
+    <None Include="wwwroot\inc\js\buttons.colVis.min.js" />
+    <None Include="wwwroot\inc\js\buttons.html5.min.js" />
+    <None Include="wwwroot\inc\js\buttons.print.min.js" />
+    <None Include="wwwroot\inc\js\dataTables.buttons.min.js" />
+    <None Include="wwwroot\inc\js\dataTables.fixedColumns.min.js" />
+    <None Include="wwwroot\inc\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\inc\js\jquery.js" />
+    <None Include="wwwroot\inc\js\jszip.min.js" />
+    <None Include="wwwroot\inc\js\pdfmake.min.js" />
+    <None Include="wwwroot\inc\js\vfs_fonts.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />

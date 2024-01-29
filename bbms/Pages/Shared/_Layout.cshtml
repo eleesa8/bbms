@@ -2,47 +2,62 @@
 <html lang="en">
 
     <head>
-		<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
-		<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-	    <script src="~/js/jquery-3.7.1.js"></script>
-		<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-		
-      
-		<script src="~/font-awesome/js/all.min.js"></script>
-	<title>Blood Bank System</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>@ViewData["Title"] Blood Bank System</title>
+		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+       <link href="~/inc/css/style.css" rel="stylesheet" />
+
+       <link href="~/datatables/css/jquery.datatables.css" rel="stylesheet" />
+
+
+      <script src="~/jquery/jquery.min.js"></script>
+      <script src="~/datatables/js/jquery.datatables.min.js"></script>
+
+      <link href="~/inc/css/buttons.datatables.min.css" rel="stylesheet" />
+
+
+
+      <script src="~/inc/js/datatables.buttons.min.js"></script>
+      <script src="~/inc/js/jszip.min.js"></script>
+      <script src="~/inc/js/pdfmake.min.js"></script>
+      <script src="~/inc/js/vfs_fonts.js"></script>
+      <script src="~/inc/js/buttons.html5.min.js"></script>
+      <script src="~/inc/js/buttons.print.min.js"></script>
+
+
+      <script src="~/inc/js/datatables.fixedcolumns.min.js"></script>
+      <script src="~/inc/js/buttons.colvis.min.js"></script>
+
+
     </head>
-
-    
-
-
     <body>
-
-   
-
-    <div class="container">
 		<div class="navigation">
-			<ul>
+			<ul class="menu">
 
 				<li>
 					<a href="">
-						<span class="icon"><i class='icons fas fa-droplet'></i></span>
-						<span class="title">BBMS</span>
+					<i class='icon fas fa-droplet'></i>
+				    <span class="title">BBMS</span>
 					</a>
 				</li>
 
 
 
 
-				<li>
-					<a href="index.php" class="active">
-						<span class="icon"><i class='icons fas fa-home-alt'></i></span>
+				<li class="active">
+					<a href="/dashboard/dashboard">
+						<i class='icon fas fa-home-alt'></i>
 						<span class="title">Dashboard</span>
 					</a>
 				</li>
 
 				<li>
-					<a href="index.php" class="active">
-						<span class="icon"><i class='icons fas fa-users'></i></span>
+					<a href="/users/view_users">
+					   <i class='icon fas fa-users'></i>
 						<span class="title">Users</span>
 					</a>
 				</li>
@@ -50,85 +65,78 @@
 
 				<li>
 					<a href="/patients/patient_view">
-						<span class="icon"><i class='icons fas fa-hospital-user'></i></span>
+						<i class='icon fas fa-hospital-user'></i>
 						<span class="title">Patients</span>
 					</a>
 				</li>
 
 				<li>
 					<a href="/donors/view_donors">
-						<span class="icon"><i class='icons fas fa-hand-holding-droplet'></i></span>
+						<i class='icon fas fa-hand-holding-droplet'></i>
 						<span class="title">Donors</span>
 					</a>
 				</li>
 
 				<li>
 					<a href="/BStock/view_blood">
-						<span class="icon"><i class='icons fas fa-sack-dollar'></i></span>
+						<i class='icon fas fa-sack-dollar'></i>
 						<span class="title">Blood Stock</span>
 					</a>
 				</li>
 
 				<li>
 					<a href="/investigation/view_investigation">
-						<span class="icon"><i class='icons fas fa-vial-virus'></i></span>
+						<i class='icon fas fa-vial-virus'></i>
 						<span class="title">Investigation</span>
+					</a>
+
+				</li>
+
+				<li>
+					<a href="/donation/Index">
+						<i class='icon fas fa-vial-virus'></i>
+						<span class="title">Donation</span>
 					</a>
 
 				</li>
 
 
 				<li>
-					<a href="">
-						<span class="icon"><i class='icons fas fa-exchange'></i></span>
+					<a href="/transfare/Index">
+						<i class='icon fas fa-exchange'></i>
 						<span class="title">Transfusion</span>
 					</a>
 				</li>
 
 
 
-				<li>
-					<a href="#" data-bs-toggle="modal" data-bs-target="#confirmlog">
-						<span class="icon"><i class='icons fas fa-sign-out-alt'></i></span>
+				<li class="logout">
+					<a href="#">
+						<i class='icon fas fa-sign-out-alt'></i>
 						<span class="title">Logout</span>
 
 					</a>
 				</li>
-
-				<li class="mode">
-					<div class="moon-sun">
-						<i class='bx bx-moon icons moon'></i>
-						<i class='bx bx-sun icons sun'></i>
-
-					</div>
-					<span class="text">Dark Mode</span>
-
-					<div class="toggle-switch">
-						<span class="switch"></span>
-					</div>
-
-				</li>
 			</ul>
 		</div>
-		</div>
+		
 		<div class="container">
         <main role="main" class="dashboard">
             @RenderBody()
         </main>
 		</div>
     
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+ 
+     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+     <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+     <script src="~/font-awesome/js/all.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
 <style>
 	* {
-		font-family: 'poppins', sans-serif;
+		font-family: Tahoma;
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
@@ -163,10 +171,9 @@
 
 
 	body {
-		min-height: 100vh;
-		background: var(--body-color);
-		transition: var(--tran-04);
-		overflow-x: hidden;
+	
+		display:flex;
+		
 	}
 
 
@@ -175,268 +182,70 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		height: 100%;
-		width: 250px;
-		padding: 10px 14px;
+		bottom: 0;
+		height: 100vh;
+		width: 240px;
+		padding: 0 1.7rem;
 		background: var(--sidebar-color);
 		transition: var(--tran-05);
-		z-index: 100;
-		box-shadow: 0 7px 25px rgba(0, 0, 0, 1.0);
-		border-right: 1px rgba(0, 0, 0, 3.0);
+		overflow: hidden;
 	}
 
-		.navigation ul {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
+	.navigation:hover{
+		width: 240px;
+		transition: 0.5s;
+	}
+
+		.menu{
+			position: relative;
+			height: 88%;
+			list-style: none;
+			padding : 0;
 		}
 
-			.navigation ul li {
-				height: 50px;
-				margin-top: 10px;
-				list-style: none;
-				display: flex;
-				align-items: center;
+			.menu li {
+				padding: 1rem;
+				margin : 8px 0;
+				border-radius: 8px;
+				transition: all 0.5s ease-in-out;
 			}
 
-				.navigation ul li:nth-child(1) {
+			.menu li:hover
+		    {
+			 background: #000;
+			color: #dc3545;
+			}
+		    .navigation ul li:nth-child(1) {
 					margin-bottom: 40px;
 					pointer-events: none;
-				}
+		     }
 
-				.navigation ul li a {
-					height: 100%;
-					width: 100%;
+				.menu a {
+					color: #fff;
+					font-size: 18px;
+					text-decoration: none;
 					display: flex;
 					align-items: center;
-					text-decoration: none;
-					border-radius: 6px;
+					gap: 1.5rem;
 				}
+				 .menu a span{
+					 overflow: hidden;
+				 }
 
-				.navigation ul li:hover a,
-				.navigation ul li.hovered a {
-					background:white;
+				 .menu a .icon{
+					 font-size: 1.2rem;
+				 }
 
-				}
+				 .logout{
+					 position: absolute;
+					 bottom: 0;
+					 left:auto;
+					 width: 100%;
+				 }
+			
 
-		.navigation li a:hover .icon .icons,
-		.navigation li a:hover .title {
-		color: black;
-		}
-
-
-		.navigation li.hovered a .icon .icons,
-		.navigation li.hovered a .title {
-			color: #dc3545;
-		}
-		.navigation ul li a .icon {
-			font-size: 20px;
-			min-width: 60px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-			.navigation ul li a .icon .icons{
-				font-size: 1.5rem;
-				color: #fff;
-				transition: var(--tran-03);
-			}
-
-		.navigation ul li a .title {
-			color: white;
-			transition: var(--tran-03);
-			font-weight : bolder;
-		}
-
-	.icon-link {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		color: var(--text-color);
-	}
-
-	
-
-	li .logout {
-		position: absolute;
-		bottom: 0;
-	}
-
-	/* switch toggle */
-
-	.mode {
-		position: relative;
-		border-radius: 6px;
-		background: var(--primary-color-light);
-	}
-
-		.mode .moon-sun {
-			height: 50px;
-			width: 60px;
-			display: flex;
-			align-items: center;
-		}
-
-		.mode .text {
-			color: var(--text-color);
-			transition: var(--tran-03);
-		}
-
-		.mode i {
-			position: absolute;
-			color: var(--text-color);
-			transition: var(--tran-03);
-		}
-
-
-			.mode i.sun {
-				opacity: 0;
-			}
-
-		.mode .toggle-switch {
-			position: absolute;
-			display: flex;
-			right: 0;
-			align-items: center;
-			justify-content: center;
-			height: 100%;
-			min-width: 60px;
-			cursor: pointer;
-			border-radius: 6px;
-			background: var(--primary-color-light);
-		}
-
-	.toggle-switch .switch {
-		height: 22px;
-		width: 44px;
-		background: var(--toggle-color);
-		position: relative;
-		border-radius: 25px;
-	}
-
-	.switch::before {
-		height: 15px;
-		width: 15px;
-		background: var(--sidebar-color);
-		content: '';
-		position: absolute;
-		border-radius: 50%;
-		top: 50%;
-		left: 5px;
-		transform: translateY(-50%);
-		transition: var(--tran-03);
-	}
-
-	body.dark .switch::before {
-		left: 24px;
-	}
-
-	body.dark .mode i.sun {
-		opacity: 1;
-	}
-
-	body.dark .mode i.moon {
-		opacity: 0;
-	}
-
-	/* close toggle*/
-
-	.toggle {
-		position: absolute;
-		top: 5%;
-		right: -20px;
-		transform: translateY(-50%) rotate(180deg);
-		height: 25px;
-		width: 25px;
-		background: var(--primary-color);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		color: var(--sidebar-color);
-		font-size: 22px;
-		transition: var(--tran-03);
-	}
-
-	body.dark .navigation .toggle {
-		transform: rotate(180deg);
-		color: var(--text-color);
-	}
-
-	.body.dark .navigation li a:hover .icon,
-	.body.dark .navigation li a:hover .text {
-		color: var(--text-color);
-	}
-
-	/*main*/
-
-	main .dashboard {
-		position: relative;
-		width: calc(100% - 130px);
-		left: 130px;
-		min-height: 100vh;
-		background: var(--body-color);
-		transition: var(--tran-05);
-	}
 
 
 </style>
 
 
-<script type="text/javascript">
-	const body = document.querySelector("body");
-	sidebar = body.querySelector(".navigation");
-	toggle = body.querySelector(".toggle");
-	searchBtn = body.querySelector(".search-box");
-	modeSwitch = body.querySelector(".toggle-switch");
-	modeText = body.querySelector(".text");
-
-	/*toggle.addEventListener("click", () =>{
-		sidebar.classList.toggle("close");
-
-	});*/
-
-
-
-	modeSwitch.addEventListener("click", () => {
-		body.classList.toggle("dark");
-
-		if (body.classList.contains("dark")) {
-			modeText.innerHTML = 'Light Mode';
-		}
-
-		else {
-			modeText.innerText = "Dark Mode";
-		}
-	});
-
-	$(document).ready(function () {
-
-		$('.logout').click(function (e) {
-
-			e.preventDefault();
-			/*console.log("Hello");*/
-
-			$('#confirmlog').modal('show');
-		});
-	});
-	//active link
-
-	let list = document.querySelectorAll(".navigation li");
-
-	function activelink() {
-
-		list.forEach((item) => {
-			item.classList.remove("hovered");
-		});
-
-		this.classList.add("hovered");
-	}
-
-	list.forEach(item => item.addEventListener("mouseover", activelink));
-
-
-
-</script>

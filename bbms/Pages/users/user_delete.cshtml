@@ -1,0 +1,32 @@
+﻿@page
+
+@using System.Data.SqlClient;
+
+@{
+    string errormsg = "";
+    string connectionString = "Data Source=DESKTOP-9DNNVCS\\SQLEXPRESS;Initial Catalog=blooddb;Integrated Security=True";
+    string id = Request.Query["delete"];
+
+
+    try
+    {
+        SqlConnection con = new SqlConnection(connectionString);
+        con.Open();
+        string sql = "Delete from users where UserID = '" + id + "'";
+        SqlCommand cmd = new SqlCommand(sql, con);
+        cmd.ExecuteNonQuery();
+        con.Close();
+        errormsg = "Data Deleted Successfully";
+        Response.Redirect("/users/view_users");
+        return;
+
+    }
+
+    catch (Exception ex)
+    {
+        return;
+    }
+
+  
+   
+}

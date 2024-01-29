@@ -34,6 +34,7 @@ namespace bbms.Pages.donors
                     info.contact = reader.GetString(5);
                     info.bgroup = reader.GetString(6);
                     info.date = reader.GetString(7);
+                    info.status = reader.GetString(8);
                     donorlist.Add(info);
                 }
             }
@@ -64,6 +65,7 @@ namespace bbms.Pages.donors
                     donorinfo.contact = reader.GetString(5);
                     donorinfo.bgroup = reader.GetString(6);
                     donorinfo.date= reader.GetString(7);
+                    donorinfo.status = reader.GetString(8);
                 }
 
             }
@@ -84,6 +86,7 @@ namespace bbms.Pages.donors
             string phone = Request.Form["phone"];
             string bgroup = Request.Form["bgroup"];
             string date = Request.Form["date"];
+
             try
             {
                 //update
@@ -150,5 +153,6 @@ namespace bbms.Pages.donors
         public string contact;
         public string bgroup;
         public string date;
+        public string status;
     }
 }

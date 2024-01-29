@@ -1746,7 +1746,7 @@ readers do not read off random characters that represent icons */
   content: "\e50d"; }
 
 .fa-person-circle-minus::before {
-  content: "\e540"; }
+  content: "\e440"; }
 
 .fa-ban::before {
   content: "\f05e"; }
@@ -3339,10 +3339,10 @@ readers do not read off random characters that represent icons */
   content: "\f5a4"; }
 
 .fa-square-parking::before {
-  content: "\f540"; }
+  content: "\f440"; }
 
 .fa-parking::before {
-  content: "\f540"; }
+  content: "\f440"; }
 
 .fa-house-signal::before {
   content: "\e012"; }
