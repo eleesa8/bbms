@@ -1,6 +1,14 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
 @model bbms.Pages.BStock.view_bloodModel
 @{
+}
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
 }
 
 @if (Model.errormsg.Length > 0)
@@ -90,6 +98,7 @@
                             <td>@row.amount</td>
                             <td>
                                 <a href="/BStock/view_blood?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-pen"></i></a>
+                                <a href="/reports/rptbloodstock?id=@row.id" class="btn btn-success btn-sm text-light"><i class="fas fa-print"></i></a>
                                 <a href="/BStock/blood_delete?delete=@row.id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')"><i class="fas fa-trash"></i></a>
                             </td>
 
@@ -98,7 +107,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="" style="background:red">
-                        <td colspan="8" style="height: 10px"></td>
+                        <td colspan="4" style="height: 10px"></td>
                     </tr>
                 </tfoot>
 
@@ -211,6 +220,92 @@
             color: #dc3545;
         }
 
+    .dataTables_length label {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    .dataTables_length select {
+        height: 40px;
+        width: 35%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        background: transparent;
+        color: #dc3545;
+        font-weight: bolder;
+        margin-bottom: 1rem;
+    }
+
+    .dataTables_filter input {
+        height: 40px;
+        width: 80%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+    .dataTables_filter label {
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    #mytable_info {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    .paginate_button.previous,
+    .paginate_button.next {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    a.paginate_button.current {
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+    }
+
+    .dt-buttons button.dt-button {
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 16px;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: transparent;
+        color: #dc3545;
+    }
+
+        .dt-buttons button.dt-button:hover {
+            color: #fff;
+            background: #dc3545;
+        }
+
+    button.dt-button.button-page-length.active:hover {
+        color: #dc3545;
+    }
+
+    button.dt-button.buttons-columnVisibility.active {
+        color: #dc3545;
+    }
 </style>
 
 <!--model-->

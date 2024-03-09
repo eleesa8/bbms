@@ -1,0 +1,156 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+@model bbms.Pages.users.changepassModel
+@{
+}
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
+}
+
+@if (Model.errormsg.Length > 0)
+{
+    <div class="alert alert-danger text-dark alert-dismissible fade show" role="alert">
+        @Model.errormsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+
+<div class="container">
+    <center>
+        <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
+        <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Change Password</h2>
+        <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
+    </center>
+    <div class="dcontainer">
+        <div class="form-container forget">
+            <form method="POST" onsubmit="return validate()">
+
+                <h1>Change Password</h1>
+                <input type="hidden" name="username" value="@HttpContextAccessor.HttpContext.Session.GetString("user")" />
+                <input type="password" name="old" placeholder="Old Password" autocomplete="off" required>
+                <input type="password" name="new" id="new_password" placeholder="New password" autocomplete="off" required>
+                <input type="password" name="confirm" id="confirm_password" placeholder="Confirm" autocomplete="off" required>
+                <button type="submit" name="signup">Change</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel bx-toggle-right">
+                    <img src="~/images/ch.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+
+
+
+<style>
+    * {
+        font-family: Tahoma;
+    }
+
+    .dcontainer {
+        background-color: #fff;
+        border-radius: 30px;
+        box-shadow: 0 0 25px #dc3545;
+        position: relative;
+        overflow: hidden;
+        width:90%;
+        height: 480px;
+        margin-left: 10%;
+        border: 3px solid #dc3545;
+        margin-top: 8%;
+    }
+
+        .dcontainer button {
+            background: #dc3545;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 45px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .dcontainer form {
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+        }
+
+        .dcontainer input {
+            background: #eee;
+            border: none;
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            width: 80%;
+            outline: none;
+        }
+
+    .form-container {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .forget {
+        right: 0;
+        width: 50%;
+    }
+
+
+    .toggle-container {
+        position: absolute;
+        top: 0;
+        right: 30%;
+        width: 72%;
+        height: 100%;
+        overflow: hidden;
+        transition: all 0.6s ease-in-out;
+        border-radius: 150px 0 0 100px;
+        z-index: 1000;
+    }
+
+
+    h1 {
+        color: #000;
+        font-size:24px;
+        color: #dc3545;
+        font-weight:bolder;
+    }
+
+</style>
+
+<script>
+    function validate(){
+        var new_password = document.getElementById("new_password").value;
+        var confirm_password = document.getElementById("confirm_password").value;
+        if (new_password != confirm_password) {
+            alert("Password didn't match!!.");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>

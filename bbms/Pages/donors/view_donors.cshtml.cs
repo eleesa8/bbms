@@ -106,7 +106,7 @@ namespace bbms.Pages.donors
 
             }
 
-            updatemsg = "updated successfully";
+            
             Response.Redirect("/donors/view_donors");
 
         }
@@ -137,7 +137,7 @@ namespace bbms.Pages.donors
 
             }
 
-            savemsg = "saved successfully";
+           
             Response.Redirect("/donors/view_donors");
 
         }

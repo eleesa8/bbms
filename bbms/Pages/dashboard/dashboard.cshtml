@@ -1,26 +1,38 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+
 @model bbms.Login.loginModel
 @{
    
+}
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
 }
 <body>
     <main >
         <div class="container">
             <div class="card-containers">
                 <div class="cardBox">
-                    <div class="card light-red">
-                        <div class="card-content">
-                            <div class="content">
-                                <span class="cardName text-light">Total Users</span>
-                                <span class="numbers text-light">
-                                    @Model.users
-                                </span>
+                    @if (@HttpContextAccessor.HttpContext.Session.GetString("role") == "Admin")
+                    {
+                        <div class="card light-red">
+                            <div class="card-content">
+                                <div class="content">
+                                    <span class="cardName text-light">Total Users</span>
+                                    <span class="numbers text-light">
+                                        @Model.users
+                                    </span>
+                                </div>
+
+                                <i class="fa fa-users iconBx dark-red" style="color:#dc3545"></i>
                             </div>
-
-                            <i class="fa fa-users iconBx dark-red" style="color:#dc3545"></i>
                         </div>
-                    </div>
-
+                    }
                     <div class="card light-purple">
                         <div class="card-content">
                             <div class="content">
@@ -63,8 +75,9 @@
             </div>
 
             <div class="card-container">   
-                <div class="cardBox">
+                <div class="cardBoxs">
                 <div class="box">
+
                     <h2 class="text">A+</h2>
                     <div class="percent AP">
                         <svg>
@@ -196,11 +209,11 @@
 
 
                             <tr>
-                                <td>1</td>
-                                <td>Badra Ali</td>
-                                <td>Female</td>
-                                <td>M.Ali</td>
-                                <td>4506655</td>
+                                <td style="font-weight:bold; color:#dc3545">1</td>
+                                <td style="font-weight:bold; color:#dc3545">Badra Ali</td>
+                                <td style="font-weight:bold; color:#dc3545">Female</td>
+                                <td style="font-weight:bold; color:#dc3545">M.Ali</td>
+                                <td style="font-weight:bold; color:#dc3545">4506655</td>
                             </tr>
 
                             <tr style="background:#dc3545;">
@@ -212,11 +225,11 @@
                             </tr>
 
                             <tr>
-                                <td style="font-weight:bold">3</td>
-                                <td style="font-weight:bold">Mohamed Ahmed</td>
-                                <td style="font-weight:bold">Male</td>
-                                <td style="font-weight:bold">Oct</td>
-                                <td style="font-weight:bold">3066654</td>
+                                <td style="font-weight:bold; color:#dc3545">3</td>
+                                <td style="font-weight:bold; color:#dc3545">Mohamed Ahmed</td>
+                                <td style="font-weight:bold; color:#dc3545">Male</td>
+                                <td style="font-weight:bold; color:#dc3545">Oct</td>
+                                <td style="font-weight:bold; color:#dc3545">3066654</td>
                             </tr>
 
                             <tr style="background:#dc3545;">
@@ -228,11 +241,11 @@
                             </tr>
 
                             <tr>
-                                <td style=" font-weight:bold">5</td>
-                                <td style=" font-weight:bold">Ali Mohamed</td>
-                                <td style=" font-weight:bold">Male</td>
-                                <td style=" font-weight:bold">Hodan</td>
-                                <td style="font-weight:bold">105430</td>
+                                <td style=" font-weight:bold; color:#dc3545">5</td>
+                                <td style=" font-weight:bold; color:#dc3545">Ali Mohamed</td>
+                                <td style=" font-weight:bold; color:#dc3545">Male</td>
+                                <td style=" font-weight:bold; color:#dc3545">Hodan</td>
+                                <td style="font-weight:bold; color:#dc3545">105430</td>
                             </tr>
 
                             <tr style="background:#dc3545;">
@@ -244,11 +257,11 @@
                             </tr>
 
                             <tr>
-                                <td style=" font-weight:bold">1</td>
-                                <td style=" font-weight:bold">Fatima Sacid</td>
-                                <td style=" font-weight:bold">Male</td>
-                                <td style=" font-weight:bold">Maxadka</td>
-                                <td style=" font-weight:bold">1207665</td>
+                                <td style=" font-weight:bold; color:#dc3545">1</td>
+                                <td style=" font-weight:bold; color:#dc3545">Fatima Sacid</td>
+                                <td style=" font-weight:bold; color:#dc3545">Male</td>
+                                <td style=" font-weight:bold; color:#dc3545">Maxadka</td>
+                                <td style=" font-weight:bold; color:#dc3545">1207665</td>
                             </tr>
 
 
@@ -310,8 +323,9 @@
                         </tr>
 
                         <tr>
-                            <td width="60px"><div class="imgBx"><i class="fas fa-droplet"></i></div>
+                            <td width="60px">
                                 <div class="imgBx"><i class="fas fa-droplet"></i></div>
+                                
                             </td>
                             <td>
                                 <h4>AB-</h4>
@@ -341,18 +355,19 @@
         </div>
        
     </main>
-            </body>
+ </body>
 
 
 <style>
     .card-container{
         background: white;
-        padding: 2rem;
+        padding: 0.5rem;
         width: 120%;
         border-radius: 10px;
         margin-top : 2rem;
         box-shadow: 0 0 25px #dc3545;
         border: 3px solid black;
+        height: 30%;
     }
 
     .card-containers {
@@ -367,6 +382,13 @@
         flex-wrap: wrap;
         gap: 5rem;
         justify-content:center;
+    }
+
+    .cardBoxs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
     }
 
     .card {
@@ -476,7 +498,7 @@
 
     .percent svg circle:nth-child(1){
         stroke-dashoffset:0;
-        stroke: #f3f3f3;
+        stroke: #ccc;
     }
 
     .AP svg circle:nth-child(2){
@@ -534,6 +556,7 @@
 
     .percent .number h2{
         font-size: 40px;
+
     }
 
     .percent .number h2 span{
@@ -542,7 +565,7 @@
 
     .text{
        padding:5px 0 0;
-       color: #000;
+       color: #dc3545;
        margin-left: 3.9rem;
        font-weight: 700;
        letter-spacing:1px;

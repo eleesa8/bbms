@@ -83,7 +83,7 @@ namespace bbms.Pages.users
                 SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
-                updatemsg = "updated successfully";
+                
                 // end update
             }
 
@@ -93,7 +93,7 @@ namespace bbms.Pages.users
                 return;
 
             }
-
+            Response.Redirect("/users/view_users");
         }
 
         public void OnPost()
@@ -110,7 +110,7 @@ namespace bbms.Pages.users
                 string sql = "INSERT INTO users (UserName,FullName,Password,Role) VALUES('" + name + "', '" + full + "', '" + password + "', '" + role + "')";
                 SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
                 sqlCommand.ExecuteNonQuery();
-                successmsg = "saved successfully";
+                
                 // end save
             }
 
@@ -119,9 +119,10 @@ namespace bbms.Pages.users
                 errormsg = ex.Message;
 
             }
+            Response.Redirect("/users/view_users");
 
-            
-            
+
+
         }
     }
 

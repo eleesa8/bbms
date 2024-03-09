@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace bbms.Pages.transfare
 {
@@ -68,11 +69,12 @@ namespace bbms.Pages.transfare
             }
         }
 
-        public void OnPostTransfare(string bgroup)
+        public void OnPostTransfare()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+			string blodtran = Request.Form["blodtran"];
+			SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-            string query = "SELECT * FROM bstock where BGrouo = '" + bgroup + "'";
+            string query = "SELECT * FROM bstock where BGrouo = '" + blodtran + "'";
             SqlCommand cmd1 = new SqlCommand(query, connection);
             SqlDataAdapter sda = new SqlDataAdapter(cmd1);
             DataTable dt = new DataTable();
@@ -82,44 +84,47 @@ namespace bbms.Pages.transfare
                 newstock = Convert.ToInt32(dr["Amount"].ToString());
             }
             connection.Close();
+			try
+			{
+				string id = Request.Form["id"];
+				string name = Request.Form["name"];
+				string age = Request.Form["age"];
+				string gender = Request.Form["gender"];
+				string blodgroup = Request.Form["bgroup"];
+				
+				string date = Request.Form["date"];
 
-            try
-            {
-                string id = Request.Form["id"];
-                string name = Request.Form["name"];
-                string age = Request.Form["age"];
-                string gender = Request.Form["gender"];
-                string blodgroup = Request.Form["bgroup"];
-                string blodtran = Request.Form["blodtran"];
-                string date = Request.Form["date"];
-                int stock = newstock -= 1;
+				int stock = newstock - 1;
 
-                SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
-                if(stock > 0)
-                {
-                    string sql = "UPDATE bstock SET Amount = '" + stock + "' where BGrouo = '" + blodtran + "' ";
-                    SqlCommand command = new SqlCommand(sql, conn);
-                    command.ExecuteNonQuery();
+				SqlConnection conn = new SqlConnection(connectionString);
+				conn.Open();
+				if (newstock > 0)
+				{
+					string sql = "UPDATE bstock SET Amount = " + stock + " where BGrouo = '" + blodtran + "' ";
+					SqlCommand command = new SqlCommand(sql, conn);
+					command.ExecuteNonQuery();
 
 
-                    string qry = "INSERT INTO transfare (CID, CName, Gender, Age, BGroup ,Btansfare, Date) VALUES('" + id + "', '" + name + "', '" + gender + "', '" + age + "', '" + blodgroup + "', '" + blodtran + "', '" + date + "')";
-                    SqlCommand sqlCommand = new SqlCommand(qry, conn);
-                    sqlCommand.ExecuteNonQuery();
-                    successmsg = "Blood transfusion done successfully";
-                }
-                else
-                {
-                    errormsg = "We are sorry the stock not available please choose onther one that matching";
-                }
+					string qry = "INSERT INTO transfare (CID, CName, Gender, Age, BGroup ,Btansfare, Date) VALUES('" + id + "', '" + name + "', '" + gender + "', '" + age + "', '" + blodgroup + "', '" + blodtran + "', '" + date + "')";
+					SqlCommand sqlCommand = new SqlCommand(qry, conn);
+					sqlCommand.ExecuteNonQuery();
+					successmsg = "Blood transfusion done successfully";
+				}
+				else
+				{
+					errormsg = "We are sorry the stock not available please choose onther one that matching";
+				}
 
-               
-            }
-            catch (Exception ex)
-            {
-                errormsg = ex.Message;
-            }
-        }
+
+			}
+			catch (Exception ex)
+			{
+				errormsg = ex.Message;
+			}
+
+		}
+
+        
     }
 
     public class pinfo

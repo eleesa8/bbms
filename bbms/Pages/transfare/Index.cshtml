@@ -1,9 +1,17 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+
 @model bbms.Pages.transfare.IndexModel
 @{
 }
 
-
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
+}
 @if (Model.errormsg.Length > 0)
 {
     <div class="alert alert-danger text-dark alert-dismissible fade show" role="alert">
@@ -27,7 +35,7 @@
             <br />
             <center>
                 <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
-                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Patients</h2>
+                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Transfusion</h2>
                 <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
             </center>
 
@@ -56,12 +64,12 @@
 
                     <div class="inputbox">
                         <label>Blood Tran</label>
-                        <input type="text" name="blodtran" autocomplete="off" />
+                        <input type="text" name="blodtran" autocomplete="off"  required/>
                     </div>
 
                     <div class="inputbox">
                         <label>Date</label>
-                        <input type="date" name="date" autocomplete="off" value="@Model.pinfo.bgroup" />
+                        <input type="date" name="date" autocomplete="off" required/>
                     </div>
                 </div>
                 <center>

@@ -99,7 +99,7 @@ namespace bbms.Pages.patients
 
             }
 
-            successmsg = "updated successfully";
+            
             Response.Redirect("/patients/patient_view");
         
         }
@@ -129,7 +129,7 @@ namespace bbms.Pages.patients
 
             }
 
-            successmsg = "saved successfully";
+            
             Response.Redirect("/patients/patient_view");
 
         }

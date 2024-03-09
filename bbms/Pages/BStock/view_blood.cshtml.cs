@@ -113,7 +113,7 @@ namespace bbms.Pages.BStock
 
             }
 
-            successmsg = "saved successfully";
+            
             Response.Redirect("/BStock/view_blood");
 
         }

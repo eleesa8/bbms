@@ -6,13 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
     options.RootDirectory = "/Pages";
-    options.Conventions.AddPageRoute("/Pages", "login");
+    options.Conventions.AddPageRoute("/Pages", "Index");
 })
 
     .AddRazorRuntimeCompilation();
+   
 
 
-builder.Services.AddSession();
+builder.Services.AddSession()
+    .AddHttpContextAccessor();
 
 
 var app = builder.Build();

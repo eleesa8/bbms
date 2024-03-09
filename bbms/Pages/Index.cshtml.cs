@@ -1,3 +1,4 @@
+using bbms.Pages.users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
@@ -10,6 +11,9 @@ namespace bbms.Pages
         public string errormsg = "";
         public string successmsg = "";
         private readonly ILogger<IndexModel> _logger;
+
+        private readonly IHttpContextAccessor httpContextAccessor;
+        public userinfo userinfo = new userinfo();
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -36,6 +40,7 @@ namespace bbms.Pages
                 //saving user info in session
                 HttpContext.Session.SetString("user", reader.GetString(1));
                 HttpContext.Session.SetString("fullname", reader.GetString(2));
+                HttpContext.Session.SetString("role", reader.GetString(4));
                 Response.Redirect("/dashboard/dashboard");
 
             }

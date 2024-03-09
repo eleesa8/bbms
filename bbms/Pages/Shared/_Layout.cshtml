@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -54,13 +59,16 @@
 						<span class="title">Dashboard</span>
 					</a>
 				</li>
-
+			@if (@HttpContextAccessor.HttpContext.Session.GetString("role") == "Admin")
+			{
 				<li>
 					<a href="/users/view_users">
-					   <i class='icon fas fa-users'></i>
+						<i class='icon fas fa-users'></i>
 						<span class="title">Users</span>
 					</a>
 				</li>
+			}
+				
 
 
 				<li>
@@ -108,12 +116,19 @@
 					</a>
 				</li>
 
+				<li>
+					<a href="/users/changepass">
+						<i class='icon fas fa-exchange'></i>
+						<span class="title">Change Pass</span>
+					</a>
+				</li>
+
 
 
 				<li class="logout">
-					<a href="#">
+					<a href="/users/logout">
 						<i class='icon fas fa-sign-out-alt'></i>
-						<span class="title">Logout</span>
+						<span class="title" onclick="return confirm('Are you sure you want to leave?!..')">Logout</span>
 
 					</a>
 				</li>

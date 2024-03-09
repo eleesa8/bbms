@@ -123,6 +123,7 @@ namespace bbms.Pages.donation
             {
                 datamsg = ex.Message;
             }
+            Response.Redirect("/donation/Index");
         }
     }
 

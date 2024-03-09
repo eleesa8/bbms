@@ -1,7 +1,23 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+
 @model bbms.Pages.users.view_usersModel
 @{
 }
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
+}
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("role") == "User")
+{
+    Response.Redirect("/dashboard/dashboard");
+}
+
 
 @if (Model.errormsg.Length > 0)
 {
@@ -46,7 +62,7 @@
                             </div>
                             <div class="inputbox">
                                 <label>Password</label>
-                                <input type="text" name="password" value="@Model.userinfo.password" required autocomplete="off" />
+                                <input type="password" name="password" value="@Model.userinfo.password" required autocomplete="off" />
                             </div>
                             <div class="selectbox">
                                 <label>Role</label>
@@ -206,16 +222,16 @@
             <div class="modal-body">
                 <form method="Post">
                     <div class="content">
-                        <div class="inputbox">
+                        <div class="input_box">
                             <label>UserName</label>
                             <input type="text" name="name" required autocomplete="off" />
                         </div>
 
-                        <div class="inputbox">
+                        <div class="input_box">
                             <label>FullName</label>
                             <input type="text" name="full" required autocomplete="off" />
                         </div>
-                        <div class="selectbox">
+                        <div class="select_box">
                             <label>Role</label>
                             <select name="role" required>
                                 <option value="">Select</option>
@@ -223,9 +239,9 @@
                                 <option value="User">User</option>
                             </select>
                         </div>
-                        <div class="inputbox">
+                        <div class="input_box">
                             <label>Password</label>
-                            <input type="text" name="password" required autocomplete="off" />
+                            <input type="password" name="password" required autocomplete="off" />
                         </div>
                     </div>
 
@@ -233,8 +249,8 @@
 
                     <div class="modal-footer">
 
-                        <button type="button" class="btns" data-bs-dismiss="modal">Close</button>
-                        <input name="save" type="submit" class="btns" value="Save" />
+                        <button type="button" class="buttns" data-bs-dismiss="modal">Close</button>
+                        <input name="save" type="submit" class="buttns" value="Save" />
 
                     </div>
                 </form>
@@ -250,3 +266,165 @@
         $('#mytable').DataTable();
     });
     </Script>
+
+<style>
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+
+    .input_box {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .input_box:nth-child(2n) {
+            justify-content: space-between;
+        }
+
+    .select_box:nth-child(4n) {
+        justify-content: space-between;
+    }
+
+    .input_box label {
+        width: 95%;
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: left;
+    }
+
+
+
+    .input_box input{
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        display: flex;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background : transparent;
+    }
+
+        .input_box input:is(:focus, :valid) {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+    .select_box {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .select_box select {
+            height: 40px;
+            width: 95%;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+        }
+
+            .select_box select:is(:focus, :valid) {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            }
+
+        .select_box label {
+            width: 95%;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 5px 3px;
+            text-align: left;
+        }
+
+
+    .buttns{
+        width: 40%;
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+    }
+
+        .buttns:hover {
+            background: transparent;
+            color: #dc3545;
+        }
+       .dataTables_length label{
+            color: #dc3545;
+            font-size: 20px;
+            font-weight : bold;
+            font-family: Tahoma;
+        }
+        .dataTables_length select{
+            height: 40px;
+            width: 35%;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+            margin-bottom: 1rem;
+        }
+        .dataTables_filter input{
+         height: 40px;
+         width: 80%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background : transparent;
+        }
+
+        .dataTables_filter label{
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        }
+
+        #mytable_info{
+            color: #dc3545;
+            font-size: 20px;
+            font-weight : bold;
+            font-family: Tahoma;
+        }
+        .paginate_button.previous ,
+        .paginate_button.next{
+            color: #dc3545;
+            font-size: 20px;
+            font-weight : bold;
+            font-family: Tahoma;
+        }
+        a.paginate_button.current{
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+        }
+     
+</style>

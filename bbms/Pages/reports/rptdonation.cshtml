@@ -1,0 +1,264 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@model bbms.Pages.reports.rptdonationModel
+@{
+      Layout = "/Pages/Shared/_LayoutNoSidebar.cshtml";
+}
+
+
+@if (@HttpContextAccessor.HttpContext.Session.GetString("user") == null)
+{
+    Response.Redirect("/Index");
+}
+<body class="bg-content" onload="HandleOnload()">
+
+     <main class="dashboard">
+        <div class="container">
+
+            <center>
+                <h1 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);"> Blood Bank System</h1>
+                <h2 style=" font-family : Tahoma; font-weight : bolder; color :var(--sidebar-color);">Blood Donors</h2>
+                <i class="fas fa-droplet" style="color :var(--sidebar-color);"></i>
+            </center>
+
+    <script type="text/javascript">
+    function HandleOnload() {
+        
+      window.print();
+     
+    }
+    </Script>
+    <table class="table table-bordered table-stripped" id="mytable" style="width: 115%;">
+                <thead class="bg-danger text-white" style="font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                <tr>
+                <th>DID</th>
+                <th>DName</th>
+                <th>Gender</th>
+                <th>DAge</th>
+                <th>BGroup</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.donorlist)
+                    {
+                        <tr style="color: red; font-family:Tahoma; text-align:center; font-size:16px; font-weight:700;">
+                            <td class="patient_id">@row.id</td>
+                            <td>@row.name</td>
+                            <td>@row.gender</td>
+                            <td>@row.age</td>
+                            <td>@row.bgroup</td>
+                            <td>@row.address</td>
+                            <td>@row.contact</td>
+                            <td>@row.date</td>
+                            <td>@row.status</td>
+                           
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="" style="background:red">
+                        <td colspan="9" style="height: 10px"></td>
+                    </tr>
+                </tfoot>
+
+
+            </table>
+
+</div>
+</main>
+</body>
+
+<style>
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+
+    .inputbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .inputbox:nth-child(2n) {
+            justify-content: space-between;
+        }
+
+    .select-box:nth-child(4n) {
+        justify-content: space-between;
+    }
+
+    .inputbox label {
+        width: 95%;
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: left;
+    }
+
+
+
+    .inputbox input {
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        display: flex;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+        .inputbox input:is(:focus, :valid) {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+    .selectbox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding-bottom: 15px;
+    }
+
+        .selectbox select {
+            height: 40px;
+            width: 95%;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 2px solid #dc3545;
+            outline: none;
+            background: transparent;
+            color: #dc3545;
+            font-weight: bolder;
+        }
+
+            .selectbox select:is(:focus, :valid) {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            }
+
+        .selectbox label {
+            width: 95%;
+            color: #dc3545;
+            font-weight: bold;
+            margin: 5px 3px;
+            text-align: left;
+        }
+
+
+    .btns {
+        width: 40%;
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+    }
+
+        .btns:hover {
+            background: transparent;
+            color: #dc3545;
+        }
+
+    .dataTables_length label {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    .dataTables_length select {
+        height: 40px;
+        width: 35%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        background: transparent;
+        color: #dc3545;
+        font-weight: bolder;
+        margin-bottom: 1rem;
+    }
+
+    .dataTables_filter input {
+        height: 40px;
+        width: 80%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 2px solid #dc3545;
+        outline: none;
+        font-weight: 600;
+        font-size: 18px;
+        color: #dc3545;
+        background: transparent;
+    }
+
+    .dataTables_filter label {
+        color: #dc3545;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    #mytable_info {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    .paginate_button.previous,
+    .paginate_button.next {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Tahoma;
+    }
+
+    a.paginate_button.current {
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: #fff;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: #dc3545;
+    }
+
+    .dt-buttons button.dt-button {
+        padding: 7px;
+        font-weight: bolder;
+        font-size: 16px;
+        border: .2rem solid #dc3545;
+        border-radius: 5px;
+        background: transparent;
+        color: #dc3545;
+    }
+
+        .dt-buttons button.dt-button:hover {
+            color: #fff;
+            background: #dc3545;
+        }
+
+    button.dt-button.button-page-length.active:hover {
+        color: #dc3545;
+    }
+
+    button.dt-button.buttons-columnVisibility.active {
+        color: #dc3545;
+    }
+</style>
